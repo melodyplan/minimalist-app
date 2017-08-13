@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const passport = require('passport')
+const keys = require('../config/keys')
 
 // register services
 require('../services/passport')
@@ -9,6 +10,8 @@ router.get('/', passport.authenticate('google', {
   scope: ['profile', 'email']
 }))
 
-router.get('/callback', passport.authenticate('google'))
+router.get('/callback', passport.authenticate('google'), (req, res) => {
+  res.redirect(keys.domainUrl)
+})
 
 module.exports = router
