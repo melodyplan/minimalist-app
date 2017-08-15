@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const passport = require('passport')
 const cookieSession = require('cookie-session')
 const path = require('path')
-const serveStatic = require('serve-static')
 const keys = require('./config/keys')
 
 // initialize app (buy the plot of the land)
@@ -29,8 +28,7 @@ app.use('/api', require('./routes/apiRouter'))
 // register web routes
 if (process.env.NODE_ENV === 'production') {
   // serve static files
-  app.use('/static', serveStatic('/client/dist/static'))
-
+  app.use('/static', express.static('dist'))
   // define SPA (single page app) routes
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
