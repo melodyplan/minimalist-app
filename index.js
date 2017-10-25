@@ -29,6 +29,7 @@ app.use('/api', require('./routes/apiRouter'))
 if (process.env.NODE_ENV === 'production') {
   // serve static files
   app.use(express.static(path.resolve(__dirname, 'client', 'dist')))
+
   // define SPA (single page app) routes
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
